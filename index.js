@@ -27,9 +27,32 @@ const url = require("url");
 //////////////////////////////////////////////
 /////----SERVER----///////////////
 // Creating a simple Web server
+// const server = http.createServer((req, res) => {
+//   console.log(req.url);
+//   res.end("Hello fROM the Server Site!!!");
+// });
+
+// server.listen(8000, "127.0.0.1", () => {
+//   console.log("Listening to request on port 8000");
+// });
+
+//////////////////////////////////////////////
+/////----Routing----///////////////
+
 const server = http.createServer((req, res) => {
-  console.log(req.url);
-  res.end("Hello fROM the Server Site!!!");
+  const pathName = req.url;
+
+  if (pathName === "/" || pathName === "/overview") {
+    res.end("This is the OverView!!!");
+  } else if (pathName === "/product") {
+    res.end("This is the Product!!!");
+  } else {
+    res.writeHead(404, {
+      "Content-Type": " text/html",
+    });
+    res.writeHead(404);
+    res.end("<h1>PAGE NOT FOUND!!!!!</h1>");
+  }
 });
 
 server.listen(8000, "127.0.0.1", () => {
