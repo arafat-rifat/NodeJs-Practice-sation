@@ -97,10 +97,10 @@ const dataObj = JSON.parse(data);
 // console.log("🚀 ~ file: index.js:97 ~ dataObj:", dataObj);
 
 const server = http.createServer((req, res) => {
-  const pathName = req.url;
+  const { query, pathname } = url.parse(req.url, true);
 
   // OverView Page
-  if (pathName === "/" || pathName === "/overview") {
+  if (pathname === "/" || pathname === "/overview") {
     res.writeHead(200, {
       "Content-Type": " text/html",
     });
@@ -117,14 +117,14 @@ const server = http.createServer((req, res) => {
     res.end(outPut);
   }
   // For Product Page
-  else if (pathName === "/product") {
+  else if (pathname === "/product") {
     res.writeHead(200, {
       "Content-Type": " text/html",
     });
     res.end(tempProduct);
   }
   // For API
-  else if (pathName === "/api") {
+  else if (pathname === "/api") {
     res.end(data);
     // Not Found
   } else {
